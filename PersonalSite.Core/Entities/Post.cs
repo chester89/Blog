@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PersonalSite.Core.Entities
 {
-    public class Blog
+    public class Post
     {
         public int Id { get; protected set; }
         public string Title { get; set; }

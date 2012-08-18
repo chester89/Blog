@@ -6,8 +6,9 @@ using PersonalSite.Core.Entities;
 
 namespace PersonalSite.Core.Contracts
 {
-    public interface IBlogRepository
+    public interface IPostRepository
     {
-        IQueryable<Blog> GetAll();
+        IQueryable<Post> GetAll();
+        void AddNew(Post post);
     }
 }

@@ -96,6 +96,8 @@
   <ItemGroup>
     <Compile Include="App_Start\FubuMVC.cs" />
     <Compile Include="ConfigureFubuMVC.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -103,7 +105,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -115,6 +116,10 @@
     <ProjectReference Include="..\PersonalSite.Core\PersonalSite.Core.csproj">
       <Project>{85512C37-B52B-42FC-9691-035FABEDEFA9}</Project>
       <Name>PersonalSite.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PersonalSite.Extensions\PersonalSite.Extensions.csproj">
+      <Project>{7A356070-CA41-4C2C-A2D4-5AE7AC2D90A2}</Project>
+      <Name>PersonalSite.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

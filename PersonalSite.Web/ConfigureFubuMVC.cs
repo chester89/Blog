@@ -4,6 +4,8 @@ using FubuMVC.Core;
 using FubuMVC.Core.Runtime;
 using FubuMVC.Spark;
 using HtmlTags;
+using PersonalSite.Extensions;
+using PersonalSite.Web.Controllers;
 
 namespace PersonalSite.Web
 {
@@ -24,6 +26,8 @@ namespace PersonalSite.Web
                 .IgnoreMethodSuffix("Html")
                 .RootAtAssemblyNamespace();
 
+            Routes.HomeIs<HomeController>(h => h.Index());
+
             // Match views to action methods by matching
             // on model type, view name, and namespace
             //Views.TryToAttachWithDefaultConventions();
@@ -42,6 +46,7 @@ namespace PersonalSite.Web
             Views.TryToAttach(findViews => findViews.by_ViewModel());
             Routes
                 .IgnoreControllerNamespaceEntirely()
+                .ConstrainToHttpMethod(c => c.HasOutput && !c.OutputType().Name.ContainsAny("Output", "Input"), "Get")
                 .ConstrainToHttpMethod(x => !x.HasInput || x.InputType().Name.Contains("Input"), "Get")
                 .ConstrainToHttpMethod(x => x.HasInput && x.InputType().Name.Contains("Output"), "Post");
         }
