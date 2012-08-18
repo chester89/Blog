@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{DA092F3C-1F0A-4164-90E3-612B79255B51}</ProjectGuid>
+    <ProjectGuid>{85512C37-B52B-42FC-9691-035FABEDEFA9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PersonalSite.Web.UnitTests</RootNamespace>
-    <AssemblyName>PersonalSite.Web.UnitTests</AssemblyName>
+    <RootNamespace>PersonalSite.Core</RootNamespace>
+    <AssemblyName>PersonalSite.Core</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Moq">
-      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,26 +38,11 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="xunit">
-      <HintPath>..\packages\xunit.1.9.1\lib\net20\xunit.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\BlogControllerTests.cs" />
+    <Compile Include="Contracts\IBlogRepository.cs" />
+    <Compile Include="Entities\Blog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PersonalSite.Core\PersonalSite.Core.csproj">
-      <Project>{85512C37-B52B-42FC-9691-035FABEDEFA9}</Project>
-      <Name>PersonalSite.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PersonalSite.Web\PersonalSite.Web.csproj">
-      <Project>{2574E2EA-6DDF-4650-AA60-FBD2CAAB6D57}</Project>
-      <Name>PersonalSite.Web</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

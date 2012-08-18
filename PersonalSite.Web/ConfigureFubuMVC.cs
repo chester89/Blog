@@ -1,4 +1,9 @@
+using System.Linq;
+using FluentValidation.Results;
 using FubuMVC.Core;
+using FubuMVC.Core.Runtime;
+using FubuMVC.Spark;
+using HtmlTags;
 
 namespace PersonalSite.Web
 {
@@ -21,7 +26,44 @@ namespace PersonalSite.Web
 
             // Match views to action methods by matching
             // on model type, view name, and namespace
-            Views.TryToAttachWithDefaultConventions();
+            //Views.TryToAttachWithDefaultConventions();
+
+            this.UseSpark();
+            Applies.ToThisAssembly();
+            Output.ToJson.WhenCallMatches(action => action.Returns<AjaxResponse>());
+
+            ControllerStyle();
+            HtmlConventionsForValidation();
         }
+
+        private void ControllerStyle()
+        {
+            Actions.IncludeTypesNamed(x => x.EndsWith("Controller"));
+            Views.TryToAttach(findViews => findViews.by_ViewModel());
+            Routes
+                .IgnoreControllerNamespaceEntirely()
+                .ConstrainToHttpMethod(x => !x.HasInput || x.InputType().Name.Contains("Input"), "Get")
+                .ConstrainToHttpMethod(x => x.HasInput && x.InputType().Name.Contains("Output"), "Post");
+        }
+
+        private void HtmlConventionsForValidation()
+        {
+            HtmlConvention(x => x.Editors.Always.Modify((request, tag) =>
+            {
+                var fubuRequest = request.Get<IFubuRequest>();
+                var validationResult = fubuRequest.Get<ValidationResult>();
+                if (validationResult.IsValid) return;
+                var ul = new HtmlTag("ul");
+                var liTags = validationResult.Errors.Where(error => error.PropertyName == request.Accessor.InnerProperty.Name).Select(vf => new HtmlTag("li", li => li.Text(vf.ErrorMessage)));
+                ul.Append(liTags);
+                tag.Append(ul);
+            }));
+        }
+    }
+
+    public class AjaxResponse
+    {
+        public bool Success { get; set; }
+        public object Item { get; set; }
     }
 }
