@@ -6,6 +6,7 @@ using FubuMVC.Spark;
 using HtmlTags;
 using PersonalSite.Extensions;
 using PersonalSite.Web.Controllers;
+using PersonalSite.Web.Validation;
 
 namespace PersonalSite.Web
 {
@@ -35,7 +36,7 @@ namespace PersonalSite.Web
             this.UseSpark();
             Applies.ToThisAssembly();
             Output.ToJson.WhenCallMatches(action => action.Returns<AjaxResponse>());
-
+            ApplyConvention<ValidationConfiguration>();
             ControllerStyle();
             HtmlConventionsForValidation();
         }
