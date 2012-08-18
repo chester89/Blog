@@ -32,8 +32,8 @@ namespace PersonalSite.Web.UnitTests.Controllers
         [Fact]
         public void can_add_post()
         {
-            controller.Add();
-            blogRepository.Verify(m => m.AddNew(It.IsAny<Post>()), Times.Once(), "AddNew method should be called");
+            controller.Create(new CreatePostOutputModel());
+            blogRepository.Verify(m => m.Add(It.IsAny<Post>()), Times.Once(), "Add method should be called");
         }
     }
 }

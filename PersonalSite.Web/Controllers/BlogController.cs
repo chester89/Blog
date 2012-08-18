@@ -33,7 +33,7 @@ namespace PersonalSite.Web.Controllers
 
         public FubuContinuation Create(CreatePostOutputModel model)
         {
-            postRepository.AddNew(model.DomainObject);
+            postRepository.Add(model.DomainObject);
             return FubuContinuation.RedirectTo<BlogController>(c => c.List());
         }
     }

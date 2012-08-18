@@ -6,9 +6,17 @@ using PersonalSite.Core.Entities;
 
 namespace PersonalSite.Core.Contracts
 {
-    public interface IPostRepository
+    public interface IRepository<T> where T : class
     {
-        IQueryable<Post> GetAll();
-        void AddNew(Post post);
+        T Get(int id);
+        void Add(T newEntity);
+        void Update(T entity);
+        void Delete(T entity);
+        IQueryable<T> GetAll();
+        void Transaction(Action action);
+    }
+
+    public interface IPostRepository: IRepository<Post>
+    {
     }
 }
